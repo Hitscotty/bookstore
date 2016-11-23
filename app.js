@@ -2,10 +2,11 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var app = express();
+
 app.use(bodyParser.json());
 
 Genre = require ('./models/genre');
-Book = require('./models/genre');
+Book = require('./models/book');
 
 // connect to mongoose
 mongoose.connect('mongodb://localhost/bookstore');
@@ -21,7 +22,6 @@ app.get('/api/genres', function(req, res){
             throw err;
         }
 
-        console.log(genres);
         res.json(genres);
     });
 });
@@ -56,7 +56,16 @@ app.post('/api/genres', function(req, res){
         res.json(genre);
     });
 
+});
 
+app.post('/api/books', function(req, res){
+    var book = req.body;
+    Book.addBook(book, function(err, book){
+        if(err){
+            throw err;
+        }
+        res.json(book);
+    });
 });
 
 app.listen(3000);
