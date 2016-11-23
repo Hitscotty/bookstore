@@ -6,12 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies":{
-    "express":"*",
-    "body-parser":"*",
-    "mongoose":"*"
+  "dependencies": {
+    "body-parser": "*",
+    "express": "*",
+    "mongoose": "*",
+    "nodemon": "^1.11.0"
   },
   "author": "Jonathan Portorreal",
   "license": "ISC"
-
 }
