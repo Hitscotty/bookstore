@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "body-parser": "*",
+    "cheerio": "^0.22.0",
     "express": "*",
+    "jsonfile": "^2.4.0",
     "mongoose": "*",
     "nodemon": "^1.11.0"
   },
