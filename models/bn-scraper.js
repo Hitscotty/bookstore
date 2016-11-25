@@ -33,14 +33,13 @@ function scrapeUrl (url) {
     request(url, (err, res, html) => {
 	if(!err && res.statusCode == 200){
 	    var $ = cheerio.load(html);
-	    var title = $("h1").html();
-	    var author = $("span[itemprop=author]").html();
-	    var publisher = $("div[id=ProductDetailsTab] dl :nth-child(4) a").html();
-	    var pages = $("div[id=ProductDetailsTab] dl :nth-child(8)").html();
+	    var title = $("h1").text();
+	    var author = $("span[itemprop=author]").text();
+	    var publisher = $("div[id=ProductDetailsTab] dl :nth-child(4) a").text();
+	    var pages = $("div[id=ProductDetailsTab] dl :nth-child(8)").text();
 	    var img_url = "http:" + $("img[itemprop=image]").attr('src');
-	    var description = $("div[id=truncatedOverview] b").html();
+	    var description = $("div[id=truncatedOverview] b").text();
 	    var price = $("p[class=price] span").html();
-
 
 	    var bookdata = {
 		title: title,
