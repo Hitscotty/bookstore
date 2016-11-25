@@ -6,12 +6,9 @@ var bookSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    genre:{
+    author:{
         type: String,
         required: true
-    },
-    description:{
-        type: String
     },
     publisher:{
         type: String
@@ -19,10 +16,13 @@ var bookSchema = mongoose.Schema({
     pages:{
         type: String
     },
-    image_url:{
+    img_url:{
         type: String
     },
-    buy_url:{
+    description:{
+        type: String
+    },
+    price:{
         type:String
     },
     create_date:{
@@ -53,13 +53,12 @@ module.exports.updateBook = function(id, book, options, callback){
     var query = {_id : id};
     var update = {
         title: book.title,
-        genre: book.genre,
-        description: book.description,
         author: book.author,
         publisher: book.publisher,
         pages: book.pages,
         img_url: book.img_url,
-        buy_url: book.buy_url
+        description: book.description,
+        price: book.price
     }
     Book.findOneAndUpdate(query, update, options, callback);
 }
