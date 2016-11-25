@@ -3,7 +3,13 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var app = express();
 
+
+
+app.use(express.static(__dirname+'/client'));
+
+
 app.use(bodyParser.json());
+
 
 Genre = require ('./models/genre');
 Book = require('./models/book');
@@ -64,6 +70,40 @@ app.post('/api/books', function(req, res){
         if(err){
             throw err;
         }
+        res.json(book);
+    });
+});
+
+app.put('/api/genres/:_id', function(req, res){
+    var id = req.params._id;
+    var genre = req.body;
+    Genre.updateGenre(id, genre, {}, function(err, genre){
+        if(err){
+            throw err;
+        }
+        res.json(genre);
+    });
+});
+
+app.put('/api/books/:_id', function(req, res){
+    var id = req.params._id;
+    var book = req.body;
+    Book.updateBook(id, book, {}, function(err, book){
+        if(err){
+            throw err;
+        }
+
+        res.json(book);
+    });
+});
+
+app.delete('/api/books/:_id', function(req, res){
+    var id = req.params._id;
+    Book.removeBook(id, function(err, book){
+        if(err){
+            throw err;
+        }
+
         res.json(book);
     });
 });
