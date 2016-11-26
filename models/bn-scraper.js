@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const file = 'barnesandnobles.json';
 const URL = 'http://www.barnesandnoble.com';
 const NEW_RELEASE = '/b/new-releases/_/N-1oyg?Nrpp=40';
+const page_6 = 'http://www.barnesandnoble.com/b/new-releases/_/N-1oyg?Nrpp=40&page=6';
 
 Book = require('./book');
 mongoose.connect('mongodb://localhost/bookstore');
@@ -14,7 +15,7 @@ var db = mongoose.connection;
 
 function newReleases(){
 
-    request(URL + NEW_RELEASE, function(err, res, html){
+    request(page_6, function(err, res, html){
 
 
 	if(!err && res.statusCode == 200) {
