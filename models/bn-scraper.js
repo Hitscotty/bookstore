@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const file = 'barnesandnobles.json';
 const URL = 'http://www.barnesandnoble.com';
 const NEW_RELEASE = '/b/new-releases/_/N-1oyg?Nrpp=40';
-const page_6 = 'http://www.barnesandnoble.com/b/new-releases/_/N-1oyg?Nrpp=40&page=6';
+const page_6 = 'http://www.barnesandnoble.com/b/new-releases/_/N-1oyg?Nrpp=40&page=1';
 
 Book = require('./book');
 mongoose.connect('mongodb://localhost/bookstore');
@@ -23,7 +23,7 @@ function newReleases(){
 	   return $("div[class=product-info]").each(function(i, element){
 		var buy_url = $(this).find('p[class=product-info-title] a').attr('href');
 		scrapeUrl(URL + buy_url);
-	    }).next(console.log("finsihed"));
+	    });
 	}
     });
 
@@ -31,6 +31,7 @@ function newReleases(){
 
 // scrapes book data 
 function scrapeUrl (url) { 
+    var url = url;
     request(url, (err, res, html) => {
 	if(!err && res.statusCode == 200){
 	    var $ = cheerio.load(html);
@@ -42,17 +43,20 @@ function scrapeUrl (url) {
 	    var description = $("div[id=truncatedOverview] b").text();
 	    var price = $("p[class=price] span").html();
 
+	
+
 	    var bookdata = {
 		title: title,
 		author: author,
 		publisher: publisher,
 		pages: pages,
 		img_url: img_url,
+		buy_url: url,
 		description: description,
 		price: price
 	    };
 
-            console.log("updating new releases...");
+	    console.log(url);
 	    Book.addBook(bookdata);
 	}
     });

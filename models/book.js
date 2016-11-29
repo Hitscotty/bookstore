@@ -19,6 +19,9 @@ var bookSchema = mongoose.Schema({
     img_url:{
         type: String
     },
+    buy_url:{
+        type: String
+    },
     description:{
         type: String
     },
@@ -57,6 +60,7 @@ module.exports.updateBook = function(id, book, options, callback){
         publisher: book.publisher,
         pages: book.pages,
         img_url: book.img_url,
+        buy_url: book.buy_url,
         description: book.description,
         price: book.price
     }
